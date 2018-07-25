@@ -8,8 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
 
+@interface BAEAppDelegate : NSObject <NSApplicationDelegate>
 
 @end
 
