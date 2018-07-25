@@ -88,9 +88,9 @@ const float kDistanceConstant = 200; // Book suggests 200...400
 }
 
 
--(void) projectWithWindowWidth:(CGFloat)windowWidth height:(CGFloat)windowHeight
+-(void) projectWithWindowWidth: (CGFloat)windowWidth height: (CGFloat)windowHeight scaleFactor: (CGFloat)scaleFactor
 {
-	CGFloat distanceConstant = kDistanceConstant;
+	CGFloat distanceConstant = kDistanceConstant * scaleFactor;
 	
 	for (BAEVertex3D *currVertex in self.vertices)
 	{

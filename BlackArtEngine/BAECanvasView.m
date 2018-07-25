@@ -59,13 +59,20 @@
 	[NSColor.whiteColor	set];
 	NSRectFill(self.bounds);
 	
+	CGFloat scaleFactor = self.window.backingScaleFactor;
+	
 	for (BAEObject3D *currObject in self.objects)
 	{
 		[currObject transform: _transformationMatrix];
 		[currObject objectToWorldCoordinates];
-		[currObject projectWithWindowWidth:self.bounds.size.width height: self.bounds.size.height];
+		[currObject projectWithWindowWidth:self.bounds.size.width * scaleFactor height: self.bounds.size.height * scaleFactor scaleFactor: scaleFactor];
 	}
 
+	[NSGraphicsContext saveGraphicsState];
+	NSAffineTransform *scaleTransform = [NSAffineTransform transform];
+	[scaleTransform scaleBy: 1.0 / scaleFactor];
+	[scaleTransform concat];
+	
 	CIContext *ciContext = [CIContext contextWithCGContext: NSGraphicsContext.currentContext.CGContext options:nil];
 
 	for (BAEObject3D *currObject in self.objects)
@@ -114,6 +121,7 @@
 			}
 		}
 	}
+	[NSGraphicsContext restoreGraphicsState];
 }
 
 -(BOOL) isFlipped

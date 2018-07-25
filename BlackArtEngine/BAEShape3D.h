@@ -62,7 +62,7 @@
 
 -(void)	transform: (BAEMatrix)transformMatrix;
 -(void)	objectToWorldCoordinates;
--(void) projectWithWindowWidth:(CGFloat)windowWidth height:(CGFloat)windowHeight;
+-(void) projectWithWindowWidth: (CGFloat)windowWidth height: (CGFloat)windowHeight scaleFactor: (CGFloat)scaleFactor;
 
 -(void)	collectVerticesFromPolygons;
 
