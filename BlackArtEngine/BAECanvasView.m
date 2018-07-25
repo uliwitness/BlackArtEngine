@@ -69,7 +69,7 @@
 	{
 		for (BAEPolygon3D *currPolygon in currObject.polygons)
 		{
-			//if (!currPolygon.isBackfacing)
+			if (!currPolygon.isBackfacing)
 			{
 				[currPolygon.color setStroke];
 				[[currPolygon.color colorWithAlphaComponent: 0.5] setFill];

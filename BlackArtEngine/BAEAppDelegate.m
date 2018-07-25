@@ -36,10 +36,10 @@
 							 -80.0, -80.0, -80.0,
 							 DBL_MIN], // back
 							[BAEPolygon3D polygonWithColor: NSColor.greenColor coordinates:
-							 -80.0, -80.0, 80.0,
-							 80.0, -80.0, 80.0,
-							 80.0, -80.0, -80.0,
 							 -80.0, -80.0, -80.0,
+							 80.0, -80.0, -80.0,
+							 80.0, -80.0, 80.0,
+							 -80.0, -80.0, 80.0,
 							 DBL_MIN], // top
 							[BAEPolygon3D polygonWithColor: NSColor.blueColor coordinates:
 							 -80.0, 80.0, 80.0,
@@ -48,10 +48,10 @@
 							 -80.0, 80.0, -80.0,
 							 DBL_MIN], // bottom
 							[BAEPolygon3D polygonWithColor: NSColor.cyanColor coordinates:
-							 -80.0, 80.0, 80.0,
-							 -80.0, -80.0, 80.0,
-							 -80.0, -80.0, -80.0,
 							 -80.0, 80.0, -80.0,
+							 -80.0, -80.0, -80.0,
+							 -80.0, -80.0, 80.0,
+							 -80.0, 80.0, 80.0,
 							 DBL_MIN], // left
 							[BAEPolygon3D polygonWithColor: NSColor.magentaColor coordinates:
 							 80.0, 80.0, 80.0,
@@ -116,7 +116,7 @@
 		
 		BAERotateMatrix(transformationMatrix, xAngle, yAngle, 0);
 
-		//BAEScaleMatrix(transformationMatrix, scale);
+		BAEScaleMatrix(transformationMatrix, scale);
 
 		[self.canvasView setTransformationMatrix: transformationMatrix];
 	}];
