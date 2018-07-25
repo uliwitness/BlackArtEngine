@@ -24,49 +24,53 @@
 {
 	[super awakeFromNib];
 	
-	NSURL *textureURL = [NSBundle.mainBundle URLForImageResource: @"WallTextureGrey"];
-	CIImage *textureImage = [CIImage imageWithContentsOfURL: textureURL];
-	
+	CIImage *textureImage1 = [CIImage imageWithContentsOfURL: [NSBundle.mainBundle URLForImageResource: @"WallTexture1"]];
+	CIImage *textureImage2 = [CIImage imageWithContentsOfURL: [NSBundle.mainBundle URLForImageResource: @"WallTexture2"]];
+	CIImage *textureImage3 = [CIImage imageWithContentsOfURL: [NSBundle.mainBundle URLForImageResource: @"WallTexture3"]];
+	CIImage *textureImage4 = [CIImage imageWithContentsOfURL: [NSBundle.mainBundle URLForImageResource: @"WallTexture4"]];
+	CIImage *textureImage5 = [CIImage imageWithContentsOfURL: [NSBundle.mainBundle URLForImageResource: @"WallTexture5"]];
+	CIImage *textureImage6 = [CIImage imageWithContentsOfURL: [NSBundle.mainBundle URLForImageResource: @"WallTexture6"]];
+
 	BAEObject3D *cubeObject = [BAEObject3D new];
 	cubeObject.originX = 0;
 	cubeObject.originY = 0;
 	cubeObject.originZ = 320;
 	cubeObject.polygons = @[
-							[BAEPolygon3D polygonWithTextureImage: textureImage coordinates:
-							 -80.0, 80.0, -80.0,
+							[BAEPolygon3D polygonWithTextureImage: textureImage1 coordinates:
 							 80.0, 80.0, -80.0,
 							 80.0, -80.0, -80.0,
 							 -80.0, -80.0, -80.0,
+							 -80.0, 80.0, -80.0,
 							 DBL_MIN], // back
-							[BAEPolygon3D polygonWithColor: NSColor.greenColor coordinates:
+							[BAEPolygon3D polygonWithTextureImage: textureImage2 coordinates:
+							 -80.0, -80.0, 80.0,
 							 -80.0, -80.0, -80.0,
 							 80.0, -80.0, -80.0,
 							 80.0, -80.0, 80.0,
-							 -80.0, -80.0, 80.0,
 							 DBL_MIN], // top
-							[BAEPolygon3D polygonWithColor: NSColor.blueColor coordinates:
+							[BAEPolygon3D polygonWithTextureImage: textureImage3 coordinates:
+							 -80.0, 80.0, -80.0,
 							 -80.0, 80.0, 80.0,
 							 80.0, 80.0, 80.0,
 							 80.0, 80.0, -80.0,
-							 -80.0, 80.0, -80.0,
 							 DBL_MIN], // bottom
-							[BAEPolygon3D polygonWithColor: NSColor.cyanColor coordinates:
+							[BAEPolygon3D polygonWithTextureImage: textureImage4 coordinates:
 							 -80.0, 80.0, -80.0,
 							 -80.0, -80.0, -80.0,
 							 -80.0, -80.0, 80.0,
 							 -80.0, 80.0, 80.0,
 							 DBL_MIN], // left
-							[BAEPolygon3D polygonWithColor: NSColor.magentaColor coordinates:
+							[BAEPolygon3D polygonWithTextureImage: textureImage5 coordinates:
 							 80.0, 80.0, 80.0,
 							 80.0, -80.0, 80.0,
 							 80.0, -80.0, -80.0,
 							 80.0, 80.0, -80.0,
 							 DBL_MIN], // right
-							[BAEPolygon3D polygonWithColor: NSColor.yellowColor coordinates:
+							[BAEPolygon3D polygonWithTextureImage: textureImage6 coordinates:
+							 -80.0, 80.0, 80.0,
 							 -80.0, -80.0, 80.0,
 							 80.0, -80.0, 80.0,
 							 80.0, 80.0, 80.0,
-							 -80.0, 80.0, 80.0,
 							 DBL_MIN] // front
 							];
 	[cubeObject collectVerticesFromPolygons];

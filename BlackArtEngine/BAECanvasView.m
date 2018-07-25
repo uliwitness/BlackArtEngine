@@ -78,10 +78,10 @@
 				
 				if (currPolygon.texture)
 				{
-					CGPoint topLeftPoint = NSMakePoint(currPolygon.vertices[0].sx, currPolygon.vertices[0].sy);
-					CGPoint topRightPoint = NSMakePoint(currPolygon.vertices[3].sx, currPolygon.vertices[3].sy);
-					CGPoint bottomRightPoint = NSMakePoint(currPolygon.vertices[2].sx, currPolygon.vertices[2].sy);
-					CGPoint bottomLeftPoint = NSMakePoint(currPolygon.vertices[1].sx, currPolygon.vertices[1].sy);
+					CGPoint bottomLeftPoint = NSMakePoint(currPolygon.vertices[0].sx, currPolygon.vertices[0].sy);
+					CGPoint bottomRightPoint = NSMakePoint(currPolygon.vertices[3].sx, currPolygon.vertices[3].sy);
+					CGPoint topRightPoint = NSMakePoint(currPolygon.vertices[2].sx, currPolygon.vertices[2].sy);
+					CGPoint topLeftPoint = NSMakePoint(currPolygon.vertices[1].sx, currPolygon.vertices[1].sy);
 					
 					CIFilter *perspectiveTransformation = [CIFilter filterWithName:@"CIPerspectiveTransform"];
 					[perspectiveTransformation setValue:[CIVector vectorWithCGPoint:topLeftPoint] forKey:@"inputTopLeft"];
