@@ -77,7 +77,7 @@
 	self.canvasView.objects = @[ cubeObject ];
 	
 	[self.window setFrame: NSScreen.screens.firstObject.frame display: NO];
-	[self startAnimation];
+//	[self startAnimation];
 }
 
 -(void) startAnimation

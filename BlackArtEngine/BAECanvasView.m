@@ -15,6 +15,9 @@
 @interface BAECanvasView ()
 {
 	BAEMatrix	_transformationMatrix;
+	CGFloat	_angle;
+	CGFloat _x;
+	CGFloat _z;
 }
 
 @end
@@ -51,6 +54,86 @@
 	BAECopyMatrix(transformationMatrix, _transformationMatrix);
 	
 	[self setNeedsDisplay: YES];
+}
+
+
+-(void)	keyDown: (NSEvent *)event
+{
+	[self interpretKeyEvents: @[event]];
+}
+
+
+-(void) moveUp:(nullable id)sender
+{
+	_z += 10.0;
+	[self updateTransformation];
+}
+
+
+-(void) moveDown:(nullable id)sender
+{
+	_z -= 10.0;
+	[self updateTransformation];
+}
+
+
+-(void) moveLeft:(nullable id)sender
+{
+//	_x -= 10.0;
+	_angle += 0.1;
+	if (_angle < 0.0)
+		_angle += 6.28;
+
+	[self updateTransformation];
+}
+
+
+-(void) moveRight:(nullable id)sender
+{
+//	_x += 10.0;
+	_angle -= 0.1;
+	if (_angle > 6.28)
+		_angle -= 6.28;
+	[self updateTransformation];
+}
+
+
+-(void) updateTransformation
+{
+	if (_angle > 6.28)
+		_angle -= 6.28;
+	
+	BAEInitMatrix(_transformationMatrix);
+	
+	BAERotateMatrix(_transformationMatrix, 0, _angle, 0);
+	BAETranslateMatrix(_transformationMatrix, -_x, 0, -_z);
+
+	[self setNeedsDisplay: YES];
+
+}
+
+
+-(BOOL)	acceptsFirstResponder
+{
+	return YES;
+}
+
+
+-(BOOL)	becomeFirstResponder
+{
+	return YES;
+}
+
+
+-(BOOL)	resignFirstResponder
+{
+	return YES;
+}
+
+
+-(void)mouseDown:(NSEvent *)event
+{
+	[self.window makeFirstResponder: self];
 }
 
 
