@@ -161,6 +161,44 @@ const float kDistanceConstant = 200; // Book suggests 200...400
 }
 
 
++(instancetype)	polygonWithTextureImage: (CIImage *)image coordinates: (CGFloat)inFirst, ...
+{
+	BAEPolygon3D *poly = [self new];
+	
+	poly->_texture = image;
+	
+	NSMutableArray<BAEVertex3D *> *vertices = [NSMutableArray new];
+	NSInteger idx = 0;
+	CGFloat args[3] = { 0, 0, 0 };
+	
+	args[idx++] = inFirst;
+	
+	va_list ap;
+	
+	va_start(ap, inFirst);
+	
+	while (true)
+	{
+		NSInteger subIdx = (idx++) % 3;
+		args[subIdx] = va_arg(ap, CGFloat);
+		if (args[subIdx] == DBL_MIN)
+			break;
+		
+		if (subIdx == 2)
+		{
+			BAEVertex3D *vertex = [BAEVertex3D vertexWithX: args[0] y: args[1] z: args[2]];
+			[vertices addObject: vertex];
+		}
+	}
+	
+	va_end(ap);
+	
+	poly->_vertices = vertices;
+	
+	return poly;
+}
+
+
 -(BOOL)	isBackfacing
 {
 	BAEVertex3D	*v0,*v1,*v2;

@@ -41,9 +41,11 @@
 @interface BAEPolygon3D : NSObject
 
 @property NSColor *color;
+@property CIImage *texture;
 @property NSArray<BAEVertex3D *> *vertices;
 
 +(instancetype)	polygonWithColor: (NSColor *)color coordinates: (CGFloat)inFirst, ...; /* terminated DBL_MIN. */
++(instancetype)	polygonWithTextureImage: (CIImage *)image coordinates: (CGFloat)inFirst, ...; /* terminated DBL_MIN. */
 
 -(BOOL) isBackfacing;
 

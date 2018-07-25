@@ -9,6 +9,7 @@
 #import "BAECanvasView.h"
 #import "BAEShape3D.h"
 #import "BAEMatrix.h"
+@import CoreImage;
 
 
 @interface BAECanvasView ()
@@ -65,26 +66,51 @@
 		[currObject projectWithWindowWidth:self.bounds.size.width height: self.bounds.size.height];
 	}
 
+	CIContext *ciContext = [CIContext contextWithCGContext: NSGraphicsContext.currentContext.CGContext options:nil];
+
 	for (BAEObject3D *currObject in self.objects)
 	{
 		for (BAEPolygon3D *currPolygon in currObject.polygons)
 		{
 			if (!currPolygon.isBackfacing)
 			{
-				[currPolygon.color setStroke];
-				[[currPolygon.color colorWithAlphaComponent: 0.5] setFill];
-
 				BAEVertex3D *prevVertex = currPolygon.vertices.lastObject;
-				NSBezierPath *poly = [NSBezierPath bezierPath];
-				[poly moveToPoint: NSMakePoint(prevVertex.sx, prevVertex.sy)];
 				
-				for (BAEVertex3D *currVertex in currPolygon.vertices)
+				if (currPolygon.texture)
 				{
-					[poly lineToPoint: NSMakePoint(currVertex.sx, currVertex.sy)];
+					CGPoint topLeftPoint = NSMakePoint(currPolygon.vertices[0].sx, currPolygon.vertices[0].sy);
+					CGPoint topRightPoint = NSMakePoint(currPolygon.vertices[3].sx, currPolygon.vertices[3].sy);
+					CGPoint bottomRightPoint = NSMakePoint(currPolygon.vertices[2].sx, currPolygon.vertices[2].sy);
+					CGPoint bottomLeftPoint = NSMakePoint(currPolygon.vertices[1].sx, currPolygon.vertices[1].sy);
+					
+					CIFilter *perspectiveTransformation = [CIFilter filterWithName:@"CIPerspectiveTransform"];
+					[perspectiveTransformation setValue:[CIVector vectorWithCGPoint:topLeftPoint] forKey:@"inputTopLeft"];
+					[perspectiveTransformation setValue:[CIVector vectorWithCGPoint:topRightPoint] forKey:@"inputTopRight"];
+					[perspectiveTransformation setValue:[CIVector vectorWithCGPoint:bottomRightPoint] forKey:@"inputBottomRight"];
+					[perspectiveTransformation setValue:[CIVector vectorWithCGPoint:bottomLeftPoint] forKey:@"inputBottomLeft"];
+					[perspectiveTransformation setValue:currPolygon.texture forKey:kCIInputImageKey];
+					
+					CIImage *resultImage = [perspectiveTransformation outputImage];
+					[ciContext drawImage:resultImage
+								  inRect:resultImage.extent
+								fromRect:resultImage.extent];
 				}
-				
-				[poly fill];
-				[poly stroke];
+				else
+				{
+					[currPolygon.color setStroke];
+					[[currPolygon.color colorWithAlphaComponent: 0.5] setFill];
+					
+					NSBezierPath *poly = [NSBezierPath bezierPath];
+					[poly moveToPoint: NSMakePoint(prevVertex.sx, prevVertex.sy)];
+					
+					for (BAEVertex3D *currVertex in currPolygon.vertices)
+					{
+						[poly lineToPoint: NSMakePoint(currVertex.sx, currVertex.sy)];
+					}
+					
+					[poly fill];
+					[poly stroke];
+				}
 			}
 		}
 	}

@@ -14,6 +14,7 @@
 		5583C15321037E8800734E56 /* BAECanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5583C15221037E8800734E56 /* BAECanvasView.m */; };
 		5583C1562103900600734E56 /* BAEMatrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 5583C1552103900600734E56 /* BAEMatrix.c */; };
 		5583C1592103A18900734E56 /* BAEShape3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 5583C1582103A18900734E56 /* BAEShape3D.m */; };
+		55AAFFEA21087E0E0084D549 /* WallTextureGrey.png in Resources */ = {isa = PBXBuildFile; fileRef = 55AAFFE921087E0E0084D549 /* WallTextureGrey.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		5583C1552103900600734E56 /* BAEMatrix.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = BAEMatrix.c; sourceTree = "<group>"; };
 		5583C1572103A18900734E56 /* BAEShape3D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BAEShape3D.h; sourceTree = "<group>"; };
 		5583C1582103A18900734E56 /* BAEShape3D.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BAEShape3D.m; sourceTree = "<group>"; };
+		55AAFFE921087E0E0084D549 /* WallTextureGrey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WallTextureGrey.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 				5583C14821037AE200734E56 /* Info.plist */,
 				5583C14921037AE200734E56 /* main.m */,
 				5583C14B21037AE200734E56 /* BlackArtEngine.entitlements */,
+				55AAFFE921087E0E0084D549 /* WallTextureGrey.png */,
 			);
 			path = BlackArtEngine;
 			sourceTree = "<group>";
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5583C14421037AE200734E56 /* Assets.xcassets in Resources */,
+				55AAFFEA21087E0E0084D549 /* WallTextureGrey.png in Resources */,
 				5583C14721037AE200734E56 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

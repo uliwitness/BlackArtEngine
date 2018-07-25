@@ -24,12 +24,15 @@
 {
 	[super awakeFromNib];
 	
+	NSURL *textureURL = [NSBundle.mainBundle URLForImageResource: @"WallTextureGrey"];
+	CIImage *textureImage = [CIImage imageWithContentsOfURL: textureURL];
+	
 	BAEObject3D *cubeObject = [BAEObject3D new];
 	cubeObject.originX = 0;
 	cubeObject.originY = 0;
 	cubeObject.originZ = 320;
 	cubeObject.polygons = @[
-							[BAEPolygon3D polygonWithColor: NSColor.redColor coordinates:
+							[BAEPolygon3D polygonWithTextureImage: textureImage coordinates:
 							 -80.0, 80.0, -80.0,
 							 80.0, 80.0, -80.0,
 							 80.0, -80.0, -80.0,
