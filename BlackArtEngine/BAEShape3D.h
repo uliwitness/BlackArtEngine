@@ -10,33 +10,60 @@
 #define BAESHAPE3D_H
 
 #include "BAEMatrix.h"
-
-typedef struct
-{
-	float lx, ly, lz, lt;	// Shape coordinates.
-	float tx, ty, tz, tt;	// Transformed coordinates.
-	float wx, wy, wz, wt;	// World coordinates.
-	float sx, sy, st;		// Window coordinates.
-} BAEVertex3D;
+#include <Cocoa/Cocoa.h>
 
 
-typedef struct
-{
-	float begin, end;
-} BAEVertexConnect;
+@interface BAEVertex3D : NSObject
 
-typedef struct
-{
-	unsigned char color;
-	int numOfVertices;
-	int numOfLines;
-	float originX, originY, originZ;
-	BAEVertex3D *vertex;
-	BAEVertexConnect *shapeLines;
-} BAEShape3D;
+@property float lx;
+@property float ly;
+@property float lz;
+@property float lt;	// Shape coordinates.
+@property float tx;
+@property float ty;
+@property float tz;
+@property float tt;	// Transformed coordinates.
+@property float wx;
+@property float wy;
+@property float wz;
+@property float wt;	// World coordinates.
+@property float sx;
+@property float sy;
+@property float st;	// Window coordinates.
 
-void	BAETransformShape( BAEShape3D* theShape, BAEMatrix transformMatrix );
-void	BAEShapeToWorldCoordinates( BAEShape3D* theShape );
-void	BAEProjectShape( BAEShape3D* theShape, float windowWidth, float windowHeight );
++(instancetype)	vertexWithX: (float)lx y: (float)ly z: (float)lz;
+
+-(instancetype) initWithX: (float)lx y: (float)ly z: (float)lz;
+
+@end
+
+
+@interface BAEPolygon3D : NSObject
+
+@property NSColor *color;
+@property NSArray<BAEVertex3D *> *vertices;
+
++(instancetype)	polygonWithCoordinates: (CGFloat)inFirst, ...; /* terminated DBL_MIN. */
+
+-(BOOL) isBackfacing;
+
+@end
+
+
+@interface BAEObject3D : NSObject
+
+@property NSArray<BAEVertex3D *> *vertices;
+@property NSArray<BAEPolygon3D *> *polygons;
+@property float originX;
+@property float originY;
+@property float originZ;
+
+-(void)	transform: (BAEMatrix)transformMatrix;
+-(void)	objectToWorldCoordinates;
+-(void) projectWithWindowWidth:(CGFloat)windowWidth height:(CGFloat)windowHeight;
+
+-(void)	collectVerticesFromPolygons;
+
+@end
 
 #endif /* BAESHAPE3D_H */

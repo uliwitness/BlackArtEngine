@@ -24,6 +24,24 @@
 {
 	[super awakeFromNib];
 	
+	BAEObject3D *cubeObject = [BAEObject3D new];
+	cubeObject.polygons = @[
+							[BAEPolygon3D polygonWithCoordinates:
+							 -80.0, 80.0, -80.0,
+							 80.0, 80.0, -80.0,
+							 80.0, -80.0, -80.0,
+							 -80.0, -80.0, -80.0,
+							 DBL_MIN],
+							[BAEPolygon3D polygonWithCoordinates:
+							 -80.0, 80.0, 80.0,
+							 80.0, 80.0, 80.0,
+							 80.0, -80.0, 80.0,
+							 -80.0, -80.0, 80.0,
+							 DBL_MIN]
+							];
+	[cubeObject collectVerticesFromPolygons];
+	self.canvasView.objects = @[ cubeObject ];
+	
 	[self.window setFrame: NSScreen.screens.firstObject.frame display: NO];
 	[self startAnimation];
 }
@@ -34,7 +52,7 @@
 	__block float scale = 1.0;
 	__block BOOL scaleIncreasing = NO;
 	
-	[NSTimer scheduledTimerWithTimeInterval: 0.2 repeats: YES block:^(NSTimer * _Nonnull timer)
+	[NSTimer scheduledTimerWithTimeInterval: 0.05 repeats: YES block:^(NSTimer * _Nonnull timer)
 	{
 		xAngle += 0.1;
 		if (xAngle > 6.28)

@@ -13,7 +13,7 @@
 		5583C14A21037AE200734E56 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5583C14921037AE200734E56 /* main.m */; };
 		5583C15321037E8800734E56 /* BAECanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5583C15221037E8800734E56 /* BAECanvasView.m */; };
 		5583C1562103900600734E56 /* BAEMatrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 5583C1552103900600734E56 /* BAEMatrix.c */; };
-		5583C1592103A18900734E56 /* BAEShape3D.c in Sources */ = {isa = PBXBuildFile; fileRef = 5583C1582103A18900734E56 /* BAEShape3D.c */; };
+		5583C1592103A18900734E56 /* BAEShape3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 5583C1582103A18900734E56 /* BAEShape3D.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,7 +30,7 @@
 		5583C1542103900600734E56 /* BAEMatrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BAEMatrix.h; sourceTree = "<group>"; };
 		5583C1552103900600734E56 /* BAEMatrix.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = BAEMatrix.c; sourceTree = "<group>"; };
 		5583C1572103A18900734E56 /* BAEShape3D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BAEShape3D.h; sourceTree = "<group>"; };
-		5583C1582103A18900734E56 /* BAEShape3D.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = BAEShape3D.c; sourceTree = "<group>"; };
+		5583C1582103A18900734E56 /* BAEShape3D.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BAEShape3D.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +70,7 @@
 				5583C1542103900600734E56 /* BAEMatrix.h */,
 				5583C1552103900600734E56 /* BAEMatrix.c */,
 				5583C1572103A18900734E56 /* BAEShape3D.h */,
-				5583C1582103A18900734E56 /* BAEShape3D.c */,
+				5583C1582103A18900734E56 /* BAEShape3D.m */,
 				5583C14321037AE200734E56 /* Assets.xcassets */,
 				5583C14521037AE200734E56 /* MainMenu.xib */,
 				5583C14821037AE200734E56 /* Info.plist */,
@@ -151,7 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5583C15321037E8800734E56 /* BAECanvasView.m in Sources */,
-				5583C1592103A18900734E56 /* BAEShape3D.c in Sources */,
+				5583C1592103A18900734E56 /* BAEShape3D.m in Sources */,
 				5583C14A21037AE200734E56 /* main.m in Sources */,
 				5583C14221037ADE00734E56 /* BAEAppDelegate.m in Sources */,
 				5583C1562103900600734E56 /* BAEMatrix.c in Sources */,

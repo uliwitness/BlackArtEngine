@@ -11,87 +11,6 @@
 #import "BAEMatrix.h"
 
 
-static BAEVertex3D	sCubeVertexArray[] =
-{
-	{
-		-80,	80,		-80,	1,
-		0,		0,		0,		1,
-		0,		0,		0,		1,
-		0,		0,		1,			/* Vertex 0 */
-	},
-	{
-		80,		80,		-80,	1,
-		0,		0,		0,		1,
-		0,		0,		0,		1,
-		0,		0,		1,			/* Vertex 1 */
-	},
-	{
-		80,		-80,	-80,	1,
-		0,		0,		0,		1,
-		0,		0,		0,		1,
-		0,		0,		1,			/* Vertex 2 */
-	},
-	{
-		-80,	-80,	-80,	1,
-		0,		0,		0,		1,
-		0,		0,		0,		1,
-		0,		0,		1,			/* Vertex 3 */
-	},
-	{
-		-80,	80,		80,		1,
-		0,		0,		0,		1,
-		0,		0,		0,		1,
-		0,		0,		1,			/* Vertex 4 */
-	},
-	{
-		80,		80,		80,		1,
-		0,		0,		0,		1,
-		0,		0,		0,		1,
-		0,		0,		1,			/* Vertex 5 */
-	},
-	{
-		80,		-80,	80,		1,
-		0,		0,		0,		1,
-		0,		0,		0,		1,
-		0,		0,		1,			/* Vertex 6 */
-	},
-	{
-		-80,	-80,	80,		1,
-		0,		0,		0,		1,
-		0,		0,		0,		1,
-		0,		0,		1			/* Vertex 7 */
-	}
-};
-
-
-static BAEVertexConnect sCubeVertexConnections[] =
-{
-	{ 0, 1 },
-	{ 1, 2 },
-	{ 2, 3 },
-	{ 3, 0 },
-	{ 4, 5 },
-	{ 5, 6 },
-	{ 6, 7 },
-	{ 7, 4 },
-	{ 0, 4 },
-	{ 1, 5 },
-	{ 2, 6 },
-	{ 3, 7 }
-};
-
-
-static BAEShape3D sCubeShape =
-{
-	255,
-	8,
-	12,
-	0, 0, 320,
-	sCubeVertexArray,
-	sCubeVertexConnections
-};
-
-
 @interface BAECanvasView ()
 {
 	BAEMatrix	_transformationMatrix;
@@ -139,18 +58,28 @@ static BAEShape3D sCubeShape =
 	[NSColor.whiteColor	set];
 	NSRectFill(self.bounds);
 	
-	BAETransformShape( &sCubeShape, _transformationMatrix );
-	BAEShapeToWorldCoordinates( &sCubeShape );
-	BAEProjectShape( &sCubeShape, self.bounds.size.width, self.bounds.size.height );
+	for (BAEObject3D *currObject in self.objects)
+	{
+		[currObject transform: _transformationMatrix];
+		[currObject objectToWorldCoordinates];
+		[currObject projectWithWindowWidth:self.bounds.size.width height: self.bounds.size.height];
+	}
 
 	[NSColor.blackColor	set];
-	for (int i = 0; i < sCubeShape.numOfLines; ++i)
+	for (BAEObject3D *currObject in self.objects)
 	{
-		int	beginVertex = sCubeShape.shapeLines[i].begin,
-				endVertex = sCubeShape.shapeLines[i].end;
-		
-		[NSBezierPath strokeLineFromPoint: NSMakePoint(sCubeShape.vertex[beginVertex].sx, sCubeShape.vertex[beginVertex].sy)
-								  toPoint: NSMakePoint(sCubeShape.vertex[endVertex].sx, sCubeShape.vertex[endVertex].sy)];
+		for (BAEPolygon3D *currPolygon in currObject.polygons)
+		{
+			if (!currPolygon.isBackfacing)
+			{
+				BAEVertex3D *prevVertex = currPolygon.vertices.lastObject;
+				for (BAEVertex3D *currVertex in currPolygon.vertices)
+				{
+					[NSBezierPath strokeLineFromPoint: NSMakePoint(prevVertex.sx, prevVertex.sy)
+											  toPoint: NSMakePoint(currVertex.sx, currVertex.sy)];
+				}
+			}
+		}
 	}
 }
 

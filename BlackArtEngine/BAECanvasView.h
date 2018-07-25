@@ -8,11 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 #import "BAEMatrix.h"
+#import "BAEShape3D.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BAECanvasView : NSView
+
+@property NSArray<BAEObject3D *> *objects;
 
 -(void)			setTransformationMatrix: (BAEMatrix)inMatrix;
 
