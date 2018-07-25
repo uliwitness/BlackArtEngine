@@ -90,10 +90,12 @@ const float kDistanceConstant = 200; // Book suggests 200...400
 
 -(void) projectWithWindowWidth:(CGFloat)windowWidth height:(CGFloat)windowHeight
 {
+	CGFloat distanceConstant = kDistanceConstant;
+	
 	for (BAEVertex3D *currVertex in self.vertices)
 	{
-		currVertex.sx = (currVertex.wx * windowWidth) / currVertex.wz;
-		currVertex.sy = (currVertex.wy * windowWidth) / currVertex.wz;
+		currVertex.sx = (currVertex.wx * distanceConstant) / currVertex.wz;
+		currVertex.sy = (currVertex.wy * distanceConstant) / currVertex.wz;
 		
 		currVertex.sx += (windowWidth / 2);
 		currVertex.sy += (windowHeight / 2);
@@ -121,10 +123,13 @@ const float kDistanceConstant = 200; // Book suggests 200...400
 
 @implementation BAEPolygon3D
 
-+(instancetype)	polygonWithCoordinates: (CGFloat)inFirst, ...
++(instancetype)	polygonWithColor: (NSColor *)color coordinates: (CGFloat)inFirst, ...
 {
-	NSMutableArray<BAEVertex3D *> *vertices = [NSMutableArray new];
 	BAEPolygon3D *poly = [self new];
+
+	poly->_color = color;
+	
+	NSMutableArray<BAEVertex3D *> *vertices = [NSMutableArray new];
 	NSInteger idx = 0;
 	CGFloat args[3] = { 0, 0, 0 };
 	
@@ -150,7 +155,7 @@ const float kDistanceConstant = 200; // Book suggests 200...400
 	
 	va_end(ap);
 	
-	poly.vertices = vertices;
+	poly->_vertices = vertices;
 	
 	return poly;
 }

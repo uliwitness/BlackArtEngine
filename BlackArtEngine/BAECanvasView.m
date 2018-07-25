@@ -65,19 +65,26 @@
 		[currObject projectWithWindowWidth:self.bounds.size.width height: self.bounds.size.height];
 	}
 
-	[NSColor.blackColor	set];
 	for (BAEObject3D *currObject in self.objects)
 	{
 		for (BAEPolygon3D *currPolygon in currObject.polygons)
 		{
-			if (!currPolygon.isBackfacing)
+			//if (!currPolygon.isBackfacing)
 			{
+				[currPolygon.color setStroke];
+				[[currPolygon.color colorWithAlphaComponent: 0.5] setFill];
+
 				BAEVertex3D *prevVertex = currPolygon.vertices.lastObject;
+				NSBezierPath *poly = [NSBezierPath bezierPath];
+				[poly moveToPoint: NSMakePoint(prevVertex.sx, prevVertex.sy)];
+				
 				for (BAEVertex3D *currVertex in currPolygon.vertices)
 				{
-					[NSBezierPath strokeLineFromPoint: NSMakePoint(prevVertex.sx, prevVertex.sy)
-											  toPoint: NSMakePoint(currVertex.sx, currVertex.sy)];
+					[poly lineToPoint: NSMakePoint(currVertex.sx, currVertex.sy)];
 				}
+				
+				[poly fill];
+				[poly stroke];
 			}
 		}
 	}

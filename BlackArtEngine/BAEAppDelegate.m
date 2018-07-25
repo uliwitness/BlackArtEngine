@@ -25,19 +25,46 @@
 	[super awakeFromNib];
 	
 	BAEObject3D *cubeObject = [BAEObject3D new];
+	cubeObject.originX = 0;
+	cubeObject.originY = 0;
+	cubeObject.originZ = 320;
 	cubeObject.polygons = @[
-							[BAEPolygon3D polygonWithCoordinates:
+							[BAEPolygon3D polygonWithColor: NSColor.redColor coordinates:
 							 -80.0, 80.0, -80.0,
 							 80.0, 80.0, -80.0,
 							 80.0, -80.0, -80.0,
 							 -80.0, -80.0, -80.0,
-							 DBL_MIN],
-							[BAEPolygon3D polygonWithCoordinates:
+							 DBL_MIN], // back
+							[BAEPolygon3D polygonWithColor: NSColor.greenColor coordinates:
+							 -80.0, -80.0, 80.0,
+							 80.0, -80.0, 80.0,
+							 80.0, -80.0, -80.0,
+							 -80.0, -80.0, -80.0,
+							 DBL_MIN], // top
+							[BAEPolygon3D polygonWithColor: NSColor.blueColor coordinates:
 							 -80.0, 80.0, 80.0,
 							 80.0, 80.0, 80.0,
-							 80.0, -80.0, 80.0,
+							 80.0, 80.0, -80.0,
+							 -80.0, 80.0, -80.0,
+							 DBL_MIN], // bottom
+							[BAEPolygon3D polygonWithColor: NSColor.cyanColor coordinates:
+							 -80.0, 80.0, 80.0,
 							 -80.0, -80.0, 80.0,
-							 DBL_MIN]
+							 -80.0, -80.0, -80.0,
+							 -80.0, 80.0, -80.0,
+							 DBL_MIN], // left
+							[BAEPolygon3D polygonWithColor: NSColor.magentaColor coordinates:
+							 80.0, 80.0, 80.0,
+							 80.0, -80.0, 80.0,
+							 80.0, -80.0, -80.0,
+							 80.0, 80.0, -80.0,
+							 DBL_MIN], // right
+							[BAEPolygon3D polygonWithColor: NSColor.yellowColor coordinates:
+							 -80.0, -80.0, 80.0,
+							 80.0, -80.0, 80.0,
+							 80.0, 80.0, 80.0,
+							 -80.0, 80.0, 80.0,
+							 DBL_MIN] // front
 							];
 	[cubeObject collectVerticesFromPolygons];
 	self.canvasView.objects = @[ cubeObject ];
@@ -89,7 +116,7 @@
 		
 		BAERotateMatrix(transformationMatrix, xAngle, yAngle, 0);
 
-		BAEScaleMatrix(transformationMatrix, scale);
+		//BAEScaleMatrix(transformationMatrix, scale);
 
 		[self.canvasView setTransformationMatrix: transformationMatrix];
 	}];

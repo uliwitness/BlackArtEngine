@@ -43,7 +43,7 @@
 @property NSColor *color;
 @property NSArray<BAEVertex3D *> *vertices;
 
-+(instancetype)	polygonWithCoordinates: (CGFloat)inFirst, ...; /* terminated DBL_MIN. */
++(instancetype)	polygonWithColor: (NSColor *)color coordinates: (CGFloat)inFirst, ...; /* terminated DBL_MIN. */
 
 -(BOOL) isBackfacing;
 
