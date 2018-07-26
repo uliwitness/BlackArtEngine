@@ -119,10 +119,9 @@
 
 -(void) moveLeft:(nullable id)sender
 {
-//	_x -= 10.0;
 	_angle += 0.1;
 	if (_angle < 0.0)
-		_angle += 6.28;
+		_angle += M_PI * 2.0;
 
 	[self updateTransformation];
 }
@@ -130,10 +129,9 @@
 
 -(void) moveRight:(nullable id)sender
 {
-//	_x += 10.0;
 	_angle -= 0.1;
-	if (_angle > 6.28)
-		_angle -= 6.28;
+	if (_angle > (M_PI * 2.0))
+		_angle -= (M_PI * 2.0);
 	[self updateTransformation];
 }
 
@@ -186,8 +184,8 @@
 	
 	for (BAEObject3D *currObject in self.objects)
 	{
-		[currObject transform: _transformationMatrix];
 		[currObject objectToWorldCoordinates];
+		[currObject transform: _transformationMatrix];
 		[currObject projectWithWindowWidth:self.bounds.size.width * scaleFactor height: self.bounds.size.height * scaleFactor scaleFactor: scaleFactor];
 	}
 

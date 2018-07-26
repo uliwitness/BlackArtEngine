@@ -682,7 +682,7 @@
             </items>
         </menu>
         <window title="BlackArtEngine" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="QvC-M9-y7g">
-            <windowStyleMask key="styleMask" titled="YES" fullSizeContentView="YES"/>
+            <windowStyleMask key="styleMask" titled="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" topStrut="YES"/>
             <rect key="contentRect" x="0.0" y="517" width="480" height="360"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>

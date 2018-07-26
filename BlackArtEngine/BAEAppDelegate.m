@@ -80,60 +80,11 @@
 //	[self startAnimation];
 }
 
--(void) startAnimation
-{
-	__block float xAngle = 0.0, yAngle = 0.0;
-	__block float scale = 1.0;
-	__block BOOL scaleIncreasing = NO;
-	
-	[NSTimer scheduledTimerWithTimeInterval: 0.05 repeats: YES block:^(NSTimer * _Nonnull timer)
-	{
-		xAngle += 0.1;
-		if (xAngle > 6.28)
-			xAngle -= 6.28;
-		
-		yAngle += 0.15;
-		if (yAngle > 6.28)
-			yAngle -= 6.28;
-		
-		if (scaleIncreasing)
-		{
-			scale += 0.04;
-			
-			if (scale > 1.0)
-			{
-				scale = 1.0;
-				scaleIncreasing = NO;
-			}
-		}
-		else
-		{
-			scale -= 0.04;
-			
-			if (scale < 0.1)
-			{
-				scale = 0.1;
-				scaleIncreasing = YES;
-			}
-		}
-		
-		BAEMatrix transformationMatrix;
-		
-		BAEInitMatrix(transformationMatrix);
-		
-		BAERotateMatrix(transformationMatrix, xAngle, yAngle, 0);
-
-		BAEScaleMatrix(transformationMatrix, scale);
-
-		[self.canvasView setTransformationMatrix: transformationMatrix];
-	}];
-}
-
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-	[self.window makeKeyAndOrderFront: self];
-	NSApplication.sharedApplication.presentationOptions = NSApplicationPresentationAutoHideDock | NSApplicationPresentationAutoHideMenuBar;
+	//[self.window makeKeyAndOrderFront: self];
+	[self.window toggleFullScreen: self];
 }
 
 

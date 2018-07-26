@@ -55,13 +55,14 @@ const float kDistanceConstant = 200; // Book suggests 200...400
 {
 	for (BAEVertex3D *currVertex in self.vertices)
 	{
-		float temp0 = currVertex.lx * transformMatrix[0][0] + currVertex.ly * transformMatrix[1][0] + currVertex.lz * transformMatrix[2][0] + transformMatrix[3][0];
-		float temp1 = currVertex.lx * transformMatrix[0][1] + currVertex.ly * transformMatrix[1][1] + currVertex.lz * transformMatrix[2][1] + transformMatrix[3][1];
-		float temp2 = currVertex.lx * transformMatrix[0][2] + currVertex.ly * transformMatrix[1][2] + currVertex.lz * transformMatrix[2][2] + transformMatrix[3][2];
-		float temp3 = currVertex.lx * transformMatrix[0][3] + currVertex.ly * transformMatrix[1][3] + currVertex.lz * transformMatrix[2][3] + transformMatrix[3][3];
+		float temp0 = currVertex.wx * transformMatrix[0][0] + currVertex.ly * transformMatrix[1][0] + currVertex.wz * transformMatrix[2][0] + transformMatrix[3][0];
+		float temp1 = currVertex.wx * transformMatrix[0][1] + currVertex.ly * transformMatrix[1][1] + currVertex.wz * transformMatrix[2][1] + transformMatrix[3][1];
+		float temp2 = currVertex.wx * transformMatrix[0][2] + currVertex.ly * transformMatrix[1][2] + currVertex.wz * transformMatrix[2][2] + transformMatrix[3][2];
+		float temp3 = currVertex.wx * transformMatrix[0][3] + currVertex.ly * transformMatrix[1][3] + currVertex.wz * transformMatrix[2][3] + transformMatrix[3][3];
 		
 		if (temp2 == 0.0 || isnan(temp2) || isinf(temp2))
 		{
+			temp2 = 0.00001;
 			BAEPrintMatrix( transformMatrix );
 		}
 
@@ -81,9 +82,9 @@ const float kDistanceConstant = 200; // Book suggests 200...400
 	
 	for (BAEVertex3D *currVertex in self.vertices)
 	{
-		currVertex.wx = currVertex.tx + shapeOriginX;
-		currVertex.wy = currVertex.ty + shapeOriginY;
-		currVertex.wz = currVertex.tz + shapeOriginZ;
+		currVertex.wx = currVertex.lx + shapeOriginX;
+		currVertex.wy = currVertex.ly + shapeOriginY;
+		currVertex.wz = currVertex.lz + shapeOriginZ;
 	}
 }
 
@@ -94,8 +95,8 @@ const float kDistanceConstant = 200; // Book suggests 200...400
 	
 	for (BAEVertex3D *currVertex in self.vertices)
 	{
-		currVertex.sx = (currVertex.wx * distanceConstant) / currVertex.wz;
-		currVertex.sy = (currVertex.wy * distanceConstant) / currVertex.wz;
+		currVertex.sx = (currVertex.tx * distanceConstant) / currVertex.tz;
+		currVertex.sy = (currVertex.ty * distanceConstant) / currVertex.tz;
 		
 		currVertex.sx += (windowWidth / 2);
 		currVertex.sy += (windowHeight / 2);
