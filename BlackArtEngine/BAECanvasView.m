@@ -65,14 +65,54 @@
 
 -(void) moveUp:(nullable id)sender
 {
-	_z += 10.0;
+	CGFloat distance = 10.0;
+	CGFloat	ySin, yCos;
+	CGFloat	xSin, xCos;
+	
+	/* Ignore z axis rotation, go directly to x */
+	
+	CGFloat xAngle = _angle;
+	
+	/* Take the inverse of the x rotation */
+	if (xAngle > 0)
+		xAngle = 6.28 - xAngle;
+	xSin = sin(xAngle);
+	xCos = cos(xAngle);
+	
+	/* Handle the y axis rotation */
+	ySin = sin(0);
+	yCos = cos(0);
+	
+	_x += (-ySin * xCos) * distance;
+	_z += (xCos * yCos) * distance;
+	
 	[self updateTransformation];
 }
 
 
 -(void) moveDown:(nullable id)sender
 {
-	_z -= 10.0;
+	CGFloat distance = 10.0;
+	CGFloat	ySin, yCos;
+	CGFloat	xSin, xCos;
+	
+	/* Ignore z axis rotation, go directly to x */
+	
+	CGFloat xAngle = _angle;
+	
+	/* Take the inverse of the x rotation */
+	if (xAngle > 0)
+		xAngle = 6.28 - xAngle;
+	xSin = sin(xAngle);
+	xCos = cos(xAngle);
+	
+	/* Handle the y axis rotation */
+	ySin = sin(0);
+	yCos = cos(0);
+	
+	_x -= (-ySin * xCos) * distance;
+	_z -= (xCos * yCos) * distance;
+	
 	[self updateTransformation];
 }
 
@@ -105,8 +145,8 @@
 	
 	BAEInitMatrix(_transformationMatrix);
 	
-	BAERotateMatrix(_transformationMatrix, 0, _angle, 0);
 	BAETranslateMatrix(_transformationMatrix, -_x, 0, -_z);
+	BAERotateMatrix(_transformationMatrix, 0, _angle, 0);
 
 	[self setNeedsDisplay: YES];
 
